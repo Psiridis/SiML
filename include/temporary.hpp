@@ -3,7 +3,7 @@
 
 namespace SiML
 {
-    void printing();
+    int addition(int a, int b);
 }
 
 #endif

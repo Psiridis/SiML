@@ -4,7 +4,7 @@ project(SiML_Library VERSION 1.0.0 LANGUAGES CXX)
 set(SiML_LIB SiML)
 
 set(SiML_SRC_FILES
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/printing.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/temporary.cpp
     # Add more source files here
 )
 

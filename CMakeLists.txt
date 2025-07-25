@@ -3,6 +3,8 @@ project(SiML_Library VERSION 1.0.0 LANGUAGES CXX)
 
 set(SiML_LIB SiML)
 
+option(SiML_ENABLE_TESTS "Enable building tests" ON)
+
 set(SiML_SRC_FILES
     ${CMAKE_CURRENT_SOURCE_DIR}/src/temporary.cpp
     # Add more source files here
@@ -63,3 +65,43 @@ install(FILES
     "${CMAKE_CURRENT_BINARY_DIR}/SiMLConfigVersion.cmake"
     DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${SiML_LIB}
 )
+
+if(SiML_ENABLE_TESTS)
+  include(CTest)  # Enables testing infrastructure
+  enable_testing()
+
+
+  include(FetchContent)
+  
+  # Download GoogleTest at configure time
+  FetchContent_Declare(
+    googletest
+    URL https://github.com/google/googletest/archive/refs/tags/v1.14.0.zip
+  )
+  
+  if (MSVC)
+    # Prevent GoogleTest from overriding your compiler/linker options
+    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+  endif()
+
+  FetchContent_MakeAvailable(googletest)
+  
+  # Add your test executable
+  add_executable(SiML_tests
+      tests/test_temporary.cpp
+      # Add more test source files here
+  )
+  
+  target_link_libraries(SiML_tests
+      PRIVATE
+      ${SiML_LIB}
+      gtest_main
+  )
+  
+  target_include_directories(SiML_tests PRIVATE ${CMAKE_SOURCE_DIR}/include)
+  
+  # Register the test
+  include(GoogleTest)
+  gtest_discover_tests(SiML_tests)
+
+endif()

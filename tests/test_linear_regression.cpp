@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "temporary.hpp"
+#include "linear_regression.hpp"
 
 TEST(SiML_Addition, positive_addition) {
     EXPECT_EQ(SiML::addition(1, 1), 2);

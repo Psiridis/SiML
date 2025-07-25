@@ -6,7 +6,7 @@ set(SiML_LIB SiML)
 option(SiML_ENABLE_TESTS "Enable building tests" ON)
 
 set(SiML_SRC_FILES
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/temporary.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/linear_regression.cpp
     # Add more source files here
 )
 
@@ -88,7 +88,7 @@ if(SiML_ENABLE_TESTS)
   
   # Add your test executable
   add_executable(SiML_tests
-      tests/test_temporary.cpp
+      tests/test_linear_regression.cpp
       # Add more test source files here
   )
   

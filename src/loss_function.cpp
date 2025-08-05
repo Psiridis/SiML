@@ -5,7 +5,7 @@
 
 namespace SiML
 {
-    template<typename T>
+    template<Arithmetic T>
     T MSE<T>::compute(std::span<const T> y_pred, std::span<const T> y_true) const
     {
         if (y_pred.size() != y_true.size()) {
@@ -28,7 +28,7 @@ namespace SiML
     }
 
 
-    template<typename T>
+    template<Arithmetic T>
     std::vector<T> MSE<T>::dL_dw(std::span<const T> x, std::span<const T> y_pred, std::span<const T> y_true) const
     {
         if (y_pred.size() != y_true.size()) {
@@ -59,7 +59,7 @@ namespace SiML
     }
 
 
-    template<typename T>
+    template<Arithmetic T>
     T MSE<T>::dL_db(std::span<const T> y_pred, std::span<const T> y_true) const
     {
         if (y_pred.size() != y_true.size()) {

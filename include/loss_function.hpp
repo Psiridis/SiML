@@ -24,7 +24,7 @@ namespace SiML
     };
 
 
-    template<typename T>
+    template<Arithmetic T>
     class MSE : public DifferentiableLossFunction<T>{
         public:
             /**

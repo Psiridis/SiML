@@ -6,7 +6,8 @@ set(SiML_LIB SiML)
 option(SiML_ENABLE_TESTS "Enable building tests" ON)
 
 set(SiML_SRC_FILES
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/linear_regression.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/model.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/loss_function.cpp
     # Add more source files here
 )
 
@@ -18,7 +19,7 @@ add_library(${SiML_LIB} STATIC
     ${SiML_SRC_FILES}
 )
 
-target_compile_features(${SiML_LIB} PUBLIC cxx_std_17)
+target_compile_features(${SiML_LIB} PUBLIC cxx_std_20)
 
 # cache variables for installation destinations
 include(GNUInstallDirs)
@@ -88,7 +89,8 @@ if(SiML_ENABLE_TESTS)
   
   # Add your test executable
   add_executable(SiML_tests
-      tests/test_linear_regression.cpp
+      tests/test_linear_regression_model.cpp
+      tests/test_MSE_loss_function.cpp
       # Add more test source files here
   )
   

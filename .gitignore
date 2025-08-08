@@ -3,3 +3,4 @@ install/
 .vscode/
 Testing/
 NOTES.txt
+docs_output/

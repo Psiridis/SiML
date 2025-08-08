@@ -1,0 +1,119 @@
+/**
+ * @mainpage SiML - Simple Machine Learning Library
+ *
+ * @section intro_sec Introduction
+ *
+ * **SiML** is a lightweight C++ machine learning framework built on top of
+ * the [Eigen](https://eigen.tuxfamily.org/) linear algebra library.
+ * It provides a modular architecture for:
+ * - Defining custom loss functions
+ * - Implementing optimization algorithms
+ * - Building and training machine learning models
+ *
+ * The design emphasizes:
+ * - **Separation of concerns** — loss functions, optimizers, and models are independent components
+ * - **Extensibility** — easily add new loss functions, optimizers, and model types
+ * - **Simplicity** — minimal dependencies and clear APIs
+ *
+ * @section arch_sec Architecture Overview
+ *
+ * The core modules are:
+ * - **Loss Functions** (`loss_function.hpp` / `.cpp`):
+ *   - Abstract base class `LossFunction` for any metric comparing predictions to targets
+ *   - `DifferentiableLossFunction` for gradient-based training
+ *   - Example: `MSE` (Mean Squared Error)
+ *
+ * - **Optimizers** (`optimizer.hpp` / `.cpp`):
+ *   - Abstract base `Optimizer` that updates weights and bias
+ *   - Example: `GradientDescent`, which uses a differentiable loss function to iteratively improve parameters
+ *
+ * - **Models** (`model.hpp` / `.cpp`):
+ *   - Abstract base `Model` for trainable, predictive algorithms
+ *   - Example: `LinearRegression`
+ *
+ * @section diagram_sec Class Diagram
+ *
+ * The following diagram shows the relationship between models, optimizers, and loss functions:
+ *
+ * @dot
+ * digraph SiML {
+ *     rankdir=LR;
+ *     node [shape=record, fontname=Helvetica, fontsize=10];
+ *
+ *     LossFunction [label="{LossFunction|+ compute() : double}", style=filled, fillcolor=lightgray];
+ *     DifferentiableLossFunction [label="{DifferentiableLossFunction|+ gradient() : VectorXd}", style=filled, fillcolor=lightgray];
+ *     MSE [label="{MSE|+ compute() : double\\l+ gradient() : VectorXd}", style=filled, fillcolor=white];
+ *
+ *     Optimizer [label="{Optimizer|+ optimize() : void}", style=filled, fillcolor=lightblue];
+ *     GradientDescent [label="{GradientDescent|+ optimize() : void}", style=filled, fillcolor=white];
+ *
+ *     Model [label="{Model|+ train() : void\\l+ predict() : VectorXd}", style=filled, fillcolor=lightyellow];
+ *     LinearRegression [label="{LinearRegression|+ train() : void\\l+ predict() : VectorXd}", style=filled, fillcolor=white];
+ *
+ *     LossFunction -> DifferentiableLossFunction [arrowhead="onormal"];
+ *     DifferentiableLossFunction -> MSE [arrowhead="onormal"];
+ *
+ *     Optimizer -> GradientDescent [arrowhead="onormal"];
+ *
+ *     Model -> LinearRegression [arrowhead="onormal"];
+ *
+ *     GradientDescent -> DifferentiableLossFunction [style=dashed, label="uses"];
+ *     LinearRegression -> Optimizer [style=dashed, label="uses"];
+ * }
+ * @enddot
+ *
+ * @section usage_sec Usage Example
+ *
+ * The following example shows how to train a simple linear regression model using MSE loss and gradient descent:
+ *
+ * @code{.cpp}
+ * #include "model.hpp"
+ * #include "optimizer.hpp"
+ * #include "loss_function.hpp"
+ * #include <Eigen/Dense>
+ * #include <memory>
+ * #include <iostream>
+ *
+ * int main() {
+ *     using namespace SiML;
+ *
+ *     // Example data: y = 2x + 1
+ *     Eigen::MatrixXd X(4, 1);
+ *     X << 1, 2, 3, 4;
+ *     Eigen::VectorXd y(4);
+ *     y << 3, 5, 7, 9;
+ *
+ *     // Create loss and optimizer
+ *     auto loss = std::make_shared<MSE>();
+ *     auto optimizer = std::make_shared<GradientDescent>(loss, 0.01, 1000);
+ *
+ *     // Create and train model
+ *     LinearRegression model;
+ *     model.train(X, y, optimizer);
+ *
+ *     // Predict
+ *     Eigen::VectorXd y_pred = model.predict(X);
+ *     std::cout << "Predictions: " << y_pred.transpose() << std::endl;
+ *
+ *     return 0;
+ * }
+ * @endcode
+ *
+ * @section ext_sec Extending SiML
+ *
+ * - **Adding a new loss function**:
+ *   - Inherit from `LossFunction` (or `DifferentiableLossFunction` if you need gradients)
+ *   - Implement `compute()` (and `gradient()` if differentiable)
+ *
+ * - **Adding a new optimizer**:
+ *   - Inherit from `Optimizer`
+ *   - Implement `optimize()` to adjust weights and bias based on your update rule
+ *
+ * - **Adding a new model**:
+ *   - Inherit from `Model`
+ *   - Implement `train()` and `predict()` methods
+ *
+ * @section license_sec License
+ *
+ * This project is released under the MIT License.
+ */

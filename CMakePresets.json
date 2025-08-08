@@ -1,0 +1,64 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 21,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "dev-debug",
+      "displayName": "Development - Debug",
+      "description": "Debug build with tests enabled",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/install/debug",
+        "SiML_ENABLE_TESTS": "ON"
+      }
+    },
+    {
+      "name": "dev-release",
+      "displayName": "Development - Release",
+      "description": "Optimized build without tests",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/install/release",
+        "SiML_ENABLE_TESTS": "OFF"
+      }
+    },
+    {
+      "name": "dev-debug-no-tests",
+      "displayName": "Debug build without tests",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/debug-no-tests",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/install/debug-no-tests",
+        "SiML_ENABLE_TESTS": "OFF"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "build-debug",
+      "configurePreset": "dev-debug"
+    },
+    {
+      "name": "build-release",
+      "configurePreset": "dev-release"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "test-debug",
+      "configurePreset": "dev-debug"
+    }
+  ]
+}

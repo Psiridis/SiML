@@ -52,5 +52,8 @@ cmake --build --preset build-debug
 ctest --preset test-debug -R SiML
 ```
 This will place all installed files inside the install/ directory relative to your current folder.
+```bash
+cmake --install build/debug
 
+```
 ---

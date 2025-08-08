@@ -41,13 +41,13 @@ This project integrates the [Google Test](https://github.com/google/googletest) 
 ```bash
 cmake -S . -B build/ -G Ninja -DSiML_ENABLE_TESTS=OFF
 ```
-Run tests:
+Run tests (all):
 ```bash
 cmake --build build/ --target test
 ```
-Or directly with CTest:
+Or directly with CTest (filtering only these related with SiML Library):
 ```bash
-ctest --build-dir build/
+ctest --build-dir build/ -R SiML
 ```
 
 ---

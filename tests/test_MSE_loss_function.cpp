@@ -2,7 +2,7 @@
 #include "loss_function.hpp"
 
 
-TEST(MSE, Main) {
+TEST(SiML, MSECompute) {
     SiML::MSE mse;
 
     // Simple dataset: y = 2x + 1

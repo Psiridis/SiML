@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include "model.hpp"
 
-TEST(LinearRegression, Main) {
+TEST(SiML, LinearRegressionPredict) {
     SiML::LinearRegression lr;
     auto mse = std::make_shared<SiML::MSE>();
 

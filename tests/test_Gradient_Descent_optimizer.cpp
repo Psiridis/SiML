@@ -3,7 +3,7 @@
 #include "loss_function.hpp"
 
 
-TEST(GradientDescent, Main) {
+TEST(SiML, GradientDescentOptimize) {
     auto mse = std::make_shared<SiML::MSE>();
     SiML::GradientDescent gd(mse, 0.08, 500);
 

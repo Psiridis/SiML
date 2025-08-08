@@ -49,7 +49,7 @@ Install locally in a subdirectory called `install/`:
 ```bash
 cmake --preset dev-debug
 cmake --build --preset build-debug
-ctest --prest test-debug -R SiML
+ctest --preset test-debug -R SiML
 ```
 This will place all installed files inside the install/ directory relative to your current folder.
 

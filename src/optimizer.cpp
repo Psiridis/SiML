@@ -22,8 +22,8 @@ namespace SiML
             const Eigen::VectorXd predictions = X * weights + Eigen::VectorXd::Ones(m) * bias;
 
             const Eigen::VectorXd dL_dy = m_loss_fun->gradient(y, predictions);
-            const Eigen::VectorXd dw    = X.transpose() * dL_dy; // ∂L/∂w
-            const double db             = dL_dy.sum();           // ∂L/∂b
+            const Eigen::VectorXd dw    = X.transpose() * dL_dy; // ∂L/∂w = ∂L/∂y_pred * ∂y_pred/∂w
+            const double db             = dL_dy.sum();           // ∂L/∂b = ∂L/∂y_pred * ∂y_pred/∂b
 
             // Update parameters
             weights -= m_learning_rate * dw;

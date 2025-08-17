@@ -68,11 +68,11 @@ namespace SiML
      *
      * MSE is defined as:
      * \f[
-     *   \text{MSE} = \frac{1}{n} \sum_{i=1}^n (y_{\text{pred},i} - y_{\text{true},i})^2
+     *   \text{MSE} = \frac{1}{2n} \sum_{i=1}^n (y_{\text{pred},i} - y_{\text{true},i})^2
      * \f]
      * It is differentiable, with gradient:
      * \f[
-     *   \frac{\partial L}{\partial y_{\text{pred}}} = \frac{2}{n} (y_{\text{pred}} - y_{\text{true}})
+     *   \frac{\partial L}{\partial y_{\text{pred}}} = \frac{1}{n} (y_{\text{pred}} - y_{\text{true}})
      * \f]
      */
     class MSE : public DifferentiableLossFunction
